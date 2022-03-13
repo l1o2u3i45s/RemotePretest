@@ -1,0 +1,62 @@
+﻿<Window x:Class="RemotePretest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RemotePretest"
+        xmlns:DomainModel="clr-namespace:DomainModel;assembly=DomainModel"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="User:" VerticalAlignment="Center"/>
+            <ComboBox Margin="5,0,0,0" VerticalAlignment="Center" SelectedValuePath="Tag" SelectedValue="{Binding SelectedUserType}" Width="100">
+                <ComboBoxItem  Content="QA" Tag="{x:Static DomainModel:UserType.QA}"/>
+                <ComboBoxItem  Content="RD" Tag="{x:Static DomainModel:UserType.RD}"/>
+                <ComboBoxItem  Content="PM" Tag="{x:Static DomainModel:UserType.PM}"/>
+            </ComboBox>
+
+            <TextBlock Text="TickType:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <ComboBox Margin="5,0,0,0" VerticalAlignment="Center" SelectedValuePath="Tag" SelectedValue="{Binding SelectedTicketType}" Width="100">
+                <ComboBoxItem  Content="Bug" Tag="{x:Static DomainModel:TicketType.Bug}"/>
+                <ComboBoxItem  Content="FeatureRequest" Tag="{x:Static DomainModel:TicketType.FeatureRequest}"/>
+                <ComboBoxItem  Content="TestCase" Tag="{x:Static DomainModel:TicketType.TestCase}"/> 
+            </ComboBox>
+            
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Text="Summary" VerticalAlignment="Center"/>
+            <TextBox VerticalAlignment="Center" Text="{Binding SummaryData}" Width="100" />
+
+            <TextBlock Margin="5,0,0,0" Text="Description" VerticalAlignment="Center"/>
+            <TextBox VerticalAlignment="Center" Text="{Binding DescriptionData}" Width="100" />
+
+            <Button VerticalAlignment="Center" Width="100" Margin="5,0" Content="Create" Command="{Binding CreateCommand}" IsEnabled="{Binding IsEnableCreate}"/> 
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBlock Text="Summary" VerticalAlignment="Center"/>
+            <TextBox VerticalAlignment="Center" Text="{Binding SummaryData}" Width="100" />
+
+            <TextBlock Margin="5,0,0,0" Text="Description" VerticalAlignment="Center"/>
+            <TextBox VerticalAlignment="Center" Text="{Binding DescriptionData}" Width="100" />
+
+            <Button VerticalAlignment="Center" Width="100" Margin="5,0" Content="Edit" Command="{Binding EditCommand}" IsEnabled="{Binding IsEnableEdit}"/> 
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal"> 
+            <Button VerticalAlignment="Center" Width="100" Margin="5,0" Content="Delete" Command="{Binding DeleteCommand}" IsEnabled="{Binding IsEnableDelete}"/>
+            <Button VerticalAlignment="Center" Width="100" Margin="5,0" Content="Resolve" Command="{Binding ResolveCommand}" IsEnabled="{Binding IsEnableResolved}"/>
+        </StackPanel>
+    </Grid>
+</Window>
